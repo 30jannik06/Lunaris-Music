@@ -1,0 +1,49 @@
+{
+	"name": "lunaris-music",
+	"version": "1.0.0",
+	"description": "",
+	"main": "dist/index.js",
+	"scripts": {
+		"dev": "tsx watch src/index.ts",
+		"start": "node .",
+		"build": "tsup src/index.ts --minify",
+		"format": "prettier --write \"**/*.{json,ts}\"",
+		"lint": "eslint . --ext ts --fix"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/30jannik06/Lunaris-Music.git"
+	},
+	"keywords": [
+		"discord",
+		"music"
+	],
+	"author": ".jannik",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/30jannik06/Lunaris-Music/issues"
+	},
+	"homepage": "https://github.com/30jannik06/Lunaris-Music#readme",
+	"devDependencies": {
+		"@types/node": "^22.13.10",
+		"@typescript-eslint/eslint-plugin": "^8.26.0",
+		"@typescript-eslint/parser": "^8.26.0",
+		"eslint": "^9.22.0",
+		"eslint-config-prettier": "^10.1.1",
+		"eslint-plugin-import": "^2.31.0",
+		"eslint-plugin-n": "^17.16.2",
+		"eslint-plugin-promise": "^7.2.1",
+		"prettier": "^3.5.3",
+		"tsup": "^8.4.0",
+		"tsx": "^4.19.3",
+		"typescript": "^5.8.2"
+	},
+	"dependencies": {
+		"@discord-player/extractor": "^7.1.0",
+		"@discordjs/voice": "^0.18.0",
+		"discord-player": "^7.1.0",
+		"discord.js": "^14.18.0",
+		"dotenv": "^16.4.7",
+		"ffmpeg-static": "^5.2.0"
+	}
+}
