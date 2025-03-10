@@ -128,3 +128,11 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+/.idea/
+/.idea/.gitignore
+/.idea/discord.xml
+/.idea/Lunaris-Music.iml
+/.idea/modules.xml
+/.idea/vcs.xml
+/.idea/workspace.xml
