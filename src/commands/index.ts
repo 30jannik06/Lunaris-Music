@@ -1,3 +1,4 @@
+import * as addplaylist from "./addplaylist";
 import * as addsong from "./addsong";
 import * as clearqueue from "./clearqueue";
 import * as loop from "./loop"
@@ -11,6 +12,7 @@ import * as shuffle from "./shuffle"
 import * as skip from "./skip"
 
 export const commands = {
+	addplaylist,
 	addsong,
 	clearqueue,
 	loop,
