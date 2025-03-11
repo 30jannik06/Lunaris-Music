@@ -9,13 +9,13 @@ import playerSkip from "./playerSkip";
 import playerStart from "./playerStart";
 
 export const playerEvents = {
-	audioTrackAdd,
-	disconnect,
-	emptyQueue,
-	emptyChannel,
-	error,
-	playerError,
-	playerFinish,
-	playerSkip,
-	playerStart
-}
+  audioTrackAdd,
+  disconnect,
+  emptyQueue,
+  emptyChannel,
+  error,
+  playerError,
+  playerFinish,
+  playerSkip,
+  playerStart,
+};

@@ -1,10 +1,14 @@
-import {ChatInputCommandInteraction, EmbedBuilder, SlashCommandBuilder} from "discord.js";
+import {ChatInputCommandInteraction, EmbedBuilder, SlashCommandBuilder,} from "discord.js";
 import {useQueue} from "discord-player";
 import {config} from "../config";
 
 export const data = new SlashCommandBuilder()
 	.setName("clearqueue")
-	.setDescription("Clear all upcoming songs while keeping the current track");
+	.setDescription("Clear all upcoming songs while keeping the current track")
+	.setDescriptionLocalizations({
+		de: "Alle anstehenden Titel löschen, während der aktuelle Titel beibehalten wird",
+		"en-US": "Clear all upcoming songs while keeping the current track"
+	})
 
 export async function execute(interaction: ChatInputCommandInteraction) {
 	// Sofortige DeferReply, um "Unknown interaction" zu vermeiden
@@ -13,7 +17,9 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	// Nutze entweder die Guild-ID aus der Interaktion oder aus der Config
 	const guildID = interaction.guild?.id || config.DISCORD_GUILD_ID;
 	if (!guildID) {
-		return interaction.editReply("Die Guild-ID ist nicht in der Config gesetzt.");
+		return interaction.editReply(
+			"Die Guild-ID ist nicht in der Config gesetzt.",
+		);
 	}
 
 	// Hole die Queue für den Server
@@ -33,7 +39,9 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
 	const embed = new EmbedBuilder()
 		.setTitle("Queue Cleared")
-		.setDescription(`Es wurden **${upcomingCount}** anstehende Songs entfernt.\nAktuell läuft: **${queue.currentTrack ? queue.currentTrack.title : "Kein Song"}**`)
+		.setDescription(
+			`Es wurden **${upcomingCount}** anstehende Songs entfernt.\nAktuell läuft: **${queue.currentTrack ? queue.currentTrack.title : "Kein Song"}**`,
+		)
 		.setColor("Green")
 		.setTimestamp();
 

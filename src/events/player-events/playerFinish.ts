@@ -1,4 +1,6 @@
 import { GuildQueueEvent, Player } from "discord-player";
+import {EmbedBuilder, hyperlink} from "discord.js";
+import {transcode} from "node:buffer";
 
 export default (player: Player): void => {
 	player.events.on(GuildQueueEvent.PlayerFinish, async (queue, track) => {
@@ -7,6 +9,13 @@ export default (player: Player): void => {
 			console.warn("Keine Metadata oder kein Channel in der Queue vorhanden.");
 			return;
 		}
-		await channel.send(`Finished playing **${track.id}**`);
+
+		const embed = new EmbedBuilder()
+			.setTitle("Song Finished")
+			.setDescription(`Finished playing: ${hyperlink(track.title, track.url)} (ID: ${track.id})`)
+			.setColor("Blue")
+			.setTimestamp();
+
+		await channel.send({ embeds: [embed] });
 	});
 };

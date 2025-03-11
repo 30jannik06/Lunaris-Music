@@ -1,9 +1,13 @@
-import { ChatInputCommandInteraction, SlashCommandBuilder, EmbedBuilder } from "discord.js";
-import { useQueue } from "discord-player";
+import {ChatInputCommandInteraction, EmbedBuilder, SlashCommandBuilder,} from "discord.js";
+import {useQueue} from "discord-player";
 
 export const data = new SlashCommandBuilder()
 	.setName("skip")
-	.setDescription("Skip the currently playing song");
+	.setDescription("Skip the currently playing song")
+	.setDescriptionLocalizations({
+		de: "Überspringen des aktuell gespielten Titels",
+		"en-US": "Skip the currently playing song"
+	})
 
 export async function execute(interaction: ChatInputCommandInteraction) {
 	const queue = useQueue();
@@ -14,7 +18,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			.setDescription("This server does not have an active player session.")
 			.setColor("Red")
 			.setTimestamp();
-		return interaction.reply({ embeds: [embed] });
+		return interaction.reply({embeds: [embed]});
 	}
 
 	if (!queue.isPlaying()) {
@@ -23,7 +27,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			.setDescription("There is no track playing.")
 			.setColor("Yellow")
 			.setTimestamp();
-		return interaction.reply({ embeds: [embed] });
+		return interaction.reply({embeds: [embed]});
 	}
 
 	queue.node.skip();
@@ -34,5 +38,5 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		.setColor("Green")
 		.setTimestamp();
 
-	return interaction.reply({ embeds: [embed] });
+	return interaction.reply({embeds: [embed]});
 }

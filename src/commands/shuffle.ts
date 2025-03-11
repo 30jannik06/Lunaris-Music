@@ -1,10 +1,14 @@
-import { ChatInputCommandInteraction, SlashCommandBuilder, EmbedBuilder } from "discord.js";
-import { useQueue } from "discord-player";
-import { config } from "../config";
+import {ChatInputCommandInteraction, EmbedBuilder, SlashCommandBuilder,} from "discord.js";
+import {useQueue} from "discord-player";
+import {config} from "../config";
 
 export const data = new SlashCommandBuilder()
 	.setName("shuffle")
-	.setDescription("Shuffle the tracks in the queue");
+	.setDescription("Shuffle the tracks in the queue")
+	.setDescriptionLocalizations({
+		de: "Mischen der Titel in der Warteschlange",
+		"en-US": "Shuffle the tracks in the queue"
+	})
 
 export async function execute(interaction: ChatInputCommandInteraction) {
 	// Nutze entweder die Guild-ID aus der Interaktion oder aus der Config
@@ -15,7 +19,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			.setDescription("Die Guild-ID ist nicht in der Config gesetzt.")
 			.setColor("Red")
 			.setTimestamp();
-		return interaction.reply({ embeds: [embed] });
+		return interaction.reply({embeds: [embed]});
 	}
 
 	const queue = useQueue(guildID);
@@ -25,7 +29,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			.setDescription("This server does not have an active player session.")
 			.setColor("Red")
 			.setTimestamp();
-		return interaction.reply({ embeds: [embed] });
+		return interaction.reply({embeds: [embed]});
 	}
 
 	if (queue.tracks.size < 2) {
@@ -34,7 +38,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			.setDescription("There are not enough tracks in the queue to shuffle.")
 			.setColor("Yellow")
 			.setTimestamp();
-		return interaction.reply({ embeds: [embed] });
+		return interaction.reply({embeds: [embed]});
 	}
 
 	queue.tracks.shuffle();
@@ -45,5 +49,5 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		.setColor("Green")
 		.setTimestamp();
 
-	return interaction.reply({ embeds: [embed] });
+	return interaction.reply({embeds: [embed]});
 }

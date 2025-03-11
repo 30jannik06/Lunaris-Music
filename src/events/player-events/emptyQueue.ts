@@ -1,4 +1,4 @@
-import { GuildQueueEvent, Player } from "discord-player";
+import {GuildQueueEvent, Player} from "discord-player";
 
 export default (player: Player): void => {
 	player.events.on(GuildQueueEvent.EmptyQueue, async (queue) => {
@@ -7,6 +7,6 @@ export default (player: Player): void => {
 			console.warn("Keine Metadata oder kein Channel in der Queue vorhanden.");
 			return;
 		}
-		await channel.send('Queue finished');
+		console.log("Queue finished");
 	});
 };

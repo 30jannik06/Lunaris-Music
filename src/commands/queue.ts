@@ -1,9 +1,13 @@
-import { ChatInputCommandInteraction, SlashCommandBuilder, EmbedBuilder } from "discord.js";
-import { useQueue, Track } from "discord-player";
+import {ChatInputCommandInteraction, EmbedBuilder, SlashCommandBuilder,} from "discord.js";
+import {Track, useQueue} from "discord-player";
 
 export const data = new SlashCommandBuilder()
 	.setName("queue")
-	.setDescription("Display the current queue");
+	.setDescription("Display the current queue")
+	.setDescriptionLocalizations({
+		de: "Anzeige der aktuellen Warteschlange",
+		"en-US": "Display the current queue"
+	})
 
 export async function execute(interaction: ChatInputCommandInteraction) {
 	// Queue abrufen
@@ -15,7 +19,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			.setDescription("This server does not have an active player session.")
 			.setColor("Red")
 			.setTimestamp();
-		return interaction.reply({ embeds: [embed] });
+		return interaction.reply({embeds: [embed]});
 	}
 
 	// Aktuell gespielter Track
@@ -29,18 +33,21 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	let upcoming = "None";
 	if (upcomingTracks.length > 0) {
 		upcoming = upcomingTracks
-			.map((track, index) => `${index + 1}. [${track.title}](${track.url}) - ${track.author}`)
+			.map(
+				(track, index) =>
+					`${index + 1}. [${track.title}](${track.url}) - ${track.author}`,
+			)
 			.join("\n");
 	}
 
 	const embed = new EmbedBuilder()
 		.setTitle("Current Queue")
 		.addFields(
-			{ name: "Now Playing", value: nowPlaying, inline: false },
-			{ name: "Upcoming Tracks", value: upcoming, inline: false }
+			{name: "Now Playing", value: nowPlaying, inline: false},
+			{name: "Upcoming Tracks", value: upcoming, inline: false},
 		)
 		.setColor("Blue")
 		.setTimestamp();
 
-	return interaction.reply({ embeds: [embed] });
+	return interaction.reply({embeds: [embed]});
 }
